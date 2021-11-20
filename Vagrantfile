@@ -1,7 +1,7 @@
 Vagrant.configure("2") do |config|
  
   config.vm.box = "bento/ubuntu-20.04"
-  config.vm.synced_folder ".", "/vagrant/"
+  config.vm.synced_folder ".", "/vagrant"
   config.vm.provider "virtualbox" do |v|
     v.linked_clone = true
     v.memory = 1024
@@ -34,6 +34,8 @@ Vagrant.configure("2") do |config|
       sudo apt-get update
       sudo apt-get install -y ansible git sshpass
     SHELL
+    config.vm.provision "ansible_local" do |ansible|
+      ansible.playbook = "web1app.yml"
   end  
 
 
