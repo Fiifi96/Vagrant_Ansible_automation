@@ -14,6 +14,12 @@ Vagrant.configure("2") do |config|
     web.vm.network "private_network", ip: "192.168.50.4";
   end  
 
+  config.vm.define "web2" do |web2|
+    web2.vm.hostname = "web2"
+    #web.vm.network "public_network"
+    web2.vm.network "private_network", ip: "192.168.50.5";
+  end  
+
   config.vm.define "db" do |db|
     db.vm.hostname = "mysql"
     db.vm.network "private_network", ip: "192.168.50.8";
@@ -26,7 +32,7 @@ Vagrant.configure("2") do |config|
     control.vm.network "private_network" , ip: "192.168.50.9";
     control.vm.provision "shell", inline: <<-SHELL
       sudo apt-get update
-      sudo apt-get install -y ansible git
+      sudo apt-get install -y ansible git sshpass
     SHELL
   end  
 
