@@ -34,10 +34,12 @@ Vagrant.configure("2") do |config|
       sudo apt-get update
       sudo apt-get install -y ansible git sshpass
     SHELL
-    config.vm.provision "ansible_local" do |ansible|
-      ansible.playbook = "web1app.yml"
+    
+    # control.vm.provision "ansible_local" do |ansible|
+    #   ansible.playbook = "web1app.yml"
+    # end
   end  
-
+  
 
 
 end
