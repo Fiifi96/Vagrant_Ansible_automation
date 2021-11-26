@@ -33,8 +33,14 @@ Vagrant.configure("2") do |config|
     control.vm.provision "shell", inline: <<-SHELL
       sudo apt-get update
       sudo apt-get install -y ansible git sshpass
+      sudo ansible-galaxy collection install community.general
+      sudo ansible-galaxy collection install community.mysql
     SHELL
-    
+    control.vm.provision "file", source: "/Users/Fiifi/Fii_code/local_lab/Fiifi96/Vagrant_Ansible_automation/hosts", destination: "~/hosts"
+    control.vm.provision "shell" , inline: "sudo cp hosts /etc/ansible/hosts"
+    control.vm.provision "ansible_local" do |ansible|
+      ansible.playbook = "control_conf.yml"
+    end
     # control.vm.provision "ansible_local" do |ansible|
     #   ansible.playbook = "web1app.yml"
     # end
