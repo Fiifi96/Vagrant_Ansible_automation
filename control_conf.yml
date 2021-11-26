@@ -1,0 +1,11 @@
+---
+- hosts: control
+  become: true
+
+  tasks:
+  - name: Uncomment configuration
+    replace:
+      path: /etc/ansible/ansible.cfg
+      regexp: '#(\s+)host_key_checking'
+      replace: 'host_key_checking'
+      backup: yes
