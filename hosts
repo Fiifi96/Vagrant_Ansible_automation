@@ -5,10 +5,14 @@
 [database]
 192.168.50.8
 
+[load_balancer]
+192.168.50.10
+
 [multi]
 192.168.50.4
 192.168.50.5
 192.168.50.8
+192.168.50.10
 
 [multi:vars]
 ansible_ssh_user=vagrant

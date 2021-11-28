@@ -22,10 +22,6 @@
        - python3-mysqldb
        - libmysqlclient-dev
 
-    # - name: Upgrade all apt packages
-    #   apt: 
-    #     upgrade: dist 
-    #     force_apt_get: yes
  
     - name: Ensure apache2 is present
       apt: 
@@ -38,43 +34,14 @@
         state: enabled
         policy: allow
 
-    # - name: Set logging
-    #   community.general.ufw:
-    #     logging: 'on' 
-   
-    # - community.general.ufw:
-    #     rule: reject
-    #     port: auth
-    #     log: yes
-
     - community.general.ufw:
         rule: limit
         port: ssh
         proto: tcp
-
-    # # - name: Delete OpenSSH rule
-    # #   community.general.ufw:
-    # #     rule: allow
-    # #     name: OpenSSH
-    # #     delete: yes
 
     - name: Allow all access to tcp port 80
       community.general.ufw:
         rule: allow
         name: 'Apache'
            
-    # # - name: Uncomment configuration
-    # #   replace:
-    # #     path: /etc/ansible/ansible.cfg
-    # #     regexp: '#(\s+)host_key_checking'
-    # #     replace: 'host_key_checking'
-    # #     backup: yes
-
-    # - name: Copy file with owner and permission
-    #   ansible.builtin.copy:
-    #     src: /vagrant/hosts
-    #     dest: /etc/ansible/hosts
-    #     owner: root
-    #     group: root
-    #     mode: 0644
     
