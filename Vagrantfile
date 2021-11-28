@@ -12,12 +12,18 @@ Vagrant.configure("2") do |config|
     web.vm.hostname = "web"
     #web.vm.network "public_network"
     web.vm.network "private_network", ip: "192.168.50.4";
+    web.vm.provision "file", source: "/Users/Fiifi/Fii_code/local_lab/Fiifi96/Vagrant_Ansible_automation/testweb1.html", destination: "~/testweb1.html"
+    web.vm.provision "shell" , inline: "sudo cp testweb1.html /var/www/html/testweb1.html"
+    # web.vm.provision "shell" , inline: "sudo rm /var/www/html/index.html"
   end  
 
   config.vm.define "web2" do |web2|
     web2.vm.hostname = "web2"
     #web.vm.network "public_network"
     web2.vm.network "private_network", ip: "192.168.50.5";
+    web2.vm.provision "file", source: "/Users/Fiifi/Fii_code/local_lab/Fiifi96/Vagrant_Ansible_automation/testweb2.html", destination: "~/testweb2.html"
+    web2.vm.provision "shell" , inline: "sudo cp testweb2.html /var/www/html/testweb2.html"
+    # web2.vm.provision "shell" , inline: "sudo rm /var/www/html/index.html"
   end  
 
   config.vm.define "db" do |db|
@@ -26,6 +32,12 @@ Vagrant.configure("2") do |config|
    
   end
   
+  config.vm.define "haproxy" do |haproxy|
+    haproxy.vm.hostname = "haproxy"
+    haproxy.vm.network "private_network", ip: "192.168.50.10";
+   
+  end
+
   
   config.vm.define "control" do |control|
     control.vm.hostname = "control"
