@@ -28,19 +28,19 @@
         name: apache2
         state: present
 
-
     - name: Allow everything and enable UFW
-      community.general.ufw:
+      ufw:
         state: enabled
         policy: allow
 
-    - community.general.ufw:
+    - name: Allow SSH
+      ufw:
         rule: limit
         port: ssh
         proto: tcp
 
     - name: Allow all access to tcp port 80
-      community.general.ufw:
+      ufw:
         rule: allow
         name: 'Apache'
            

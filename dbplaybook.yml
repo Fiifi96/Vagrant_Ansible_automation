@@ -17,7 +17,7 @@
        - libmysqlclient-dev
 
     - name: Allow everything and enable UFW
-      community.general.ufw:
+      ufw:
         state: enabled
         policy: allow  
 
@@ -75,10 +75,10 @@
         name: mysql
         state: restarted
 
-    - name: Run mysql query
-      community.mysql.mysql_query: 
-        query:
-        - CREATE USER 'admin'@'192.168.50.4' identified by 'password';
-        - GRANT ALL PRIVILEGES ON *.* TO 'admin'@'192.168.50.4';
-        - FLUSH PRIVILEGES;   
-        - CREATE DATABASE fbs;
+        # name: Run mysql query
+        # community.mysql.mysql_user: 
+        #   user:
+        #   - CREATE USER 'admin'@'192.168.50.4' identified by 'password';
+        #   - GRANT ALL PRIVILEGES ON *.* TO 'admin'@'192.168.50.4';
+        #   - FLUSH PRIVILEGES;   
+        #   - CREATE DATABASE fbs;

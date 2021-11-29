@@ -23,8 +23,9 @@ Vagrant.configure("2") do |config|
     web.vm.hostname = "web"
     #web.vm.network "public_network"
     web.vm.network "private_network", ip: "192.168.50.4";
+    web.vm.provision "shell" , inline: $scipt_control
     # web.vm.provision "file", source: "/Users/Fiifi/Fii_code/local_lab/Fiifi96/Vagrant_Ansible_automation/index.html", destination: "~/index.html"
-    # web.vm.provision "shell" , inline: "sudo cp index.html /var/www/html/index.html"
+    # web.vm.provision "shell" , inline: "sudo cp /vagrant//index.html /var/www/html//index.html"
     # web.vm.provision "shell" , inline: "sudo rm /var/www/html/index.html"
     
   end  
@@ -33,8 +34,9 @@ Vagrant.configure("2") do |config|
     web2.vm.hostname = "web2"
     #web.vm.network "public_network"
     web2.vm.network "private_network", ip: "192.168.50.5";
+    web2.vm.provision "shell" , inline: $scipt_control
     # web2.vm.provision "file", source: "/Users/Fiifi/Fii_code/local_lab/Fiifi96/Vagrant_Ansible_automation/index.html", destination: "~/index.html"
-    # web2.vm.provision "shell" , inline: "sudo cp index.html /var/www/html/index.html"
+    # web2.vm.provision "shell" , inline: "sudo cp /vagrant/index.html /var/www/html/index.html"
     # web2.vm.provision "shell" , inline: "sudo rm /var/www/html/index.html"
     
   end  
@@ -42,28 +44,31 @@ Vagrant.configure("2") do |config|
   config.vm.define "db" do |db|
     db.vm.hostname = "mysql"
     db.vm.network "private_network", ip: "192.168.50.8";
-   
+    db.vm.provision "shell" , inline: $scipt_control
+     
   end
   
   config.vm.define "haproxy" do |haproxy|
     haproxy.vm.hostname = "haproxy"
     haproxy.vm.network "private_network", ip: "192.168.50.10";
-   
+    haproxy.vm.provision "shell" , inline: $scipt_control 
   end
 
   
   config.vm.define "control" do |control|
     control.vm.hostname = "control"
     control.vm.network "private_network" , ip: "192.168.50.9";
-    
-    control.vm.provision "shell" , inline: $scipt_control
-      
+    control.vm.provision "shell" , inline: $scipt_control 
     control.vm.provision "file", source: "/Users/Fiifi/Fii_code/local_lab/Fiifi96/Vagrant_Ansible_automation/hosts", destination: "~/hosts"
     control.vm.provision "shell" , inline: "sudo cp hosts /etc/ansible/hosts"
 
     # control.vm.provision "ansible_local" do |ansible|
     #   ansible.playbook = "control_conf.yml"
     # end
+
+    control.vm.provision "ansible_local" do |ansible|
+      ansible.playbook = "php.yml"
+    end
 
     control.vm.provision "ansible_local" do |ansible|
       ansible.playbook = "webapp.yml"
