@@ -1,5 +1,5 @@
 ---
-- hosts: database
+- hosts: all
   become: yes
 
   tasks:
@@ -35,7 +35,16 @@
         backup: yes
       notify:
         - Restart mysql
-    
+
+    - name: Enable remote login to mysql db
+      lineinfile:
+        path: /etc/mysql/mysql.conf.d/mysqld.cnf
+        regexp: '^mysqlx-bind-address'
+        line: 'mysqlx-bind-address = 0.0.0.0'
+        backup: yes
+      notify:
+        - Restart mysql
+
     # - name: Enable remote login to mysql
     #   lineinfile:
     #     path: /etc/mysql/mysql.conf.d/mysqld.cnf
@@ -56,7 +65,7 @@
         name: "admin"
         password: "password"
         priv: '*.*:ALL'
-        host: '*'
+        host: '192.168.50.4'
         state: present
         login_unix_socket: /var/run/mysqld/mysqld.sock
 

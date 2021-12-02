@@ -1,5 +1,5 @@
 ---
-- hosts: app
+- hosts: all
   become: true
 
   tasks:
@@ -39,7 +39,7 @@
         port: ssh
         proto: tcp
 
-    - name: Allow all access to tcp port 80
+    - name: Allow all access to apache
       ufw:
         rule: allow
         name: 'Apache'
