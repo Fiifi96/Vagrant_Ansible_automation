@@ -32,8 +32,8 @@ Vagrant.configure("2") do |config|
       ansible.playbook = "webapp.yml"
     end
     # web.vm.provision "file", source: "/Users/Fiifi/Fii_code/local_lab/Fiifi96/Vagrant_Ansible_automation/index.html", destination: "~/index.html"
-    # web.vm.provision "shell" , inline: "sudo cp /vagrant//index.html /var/www/html//index.html"
-    # web.vm.provision "shell" , inline: "sudo rm /var/www/html/index.html"
+    web.vm.provision "shell" , inline: "sudo cp /vagrant//index.php /var/www/html//index.php"
+    # web.vm.provision "shell" , inline: "sudo rm /var/www/html/index.index"
     
   end  
 
