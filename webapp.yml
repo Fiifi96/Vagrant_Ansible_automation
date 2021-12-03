@@ -44,4 +44,8 @@
         rule: allow
         name: 'Apache'
            
-    
+    - name: Allow port 80
+      ufw:
+        rule: limit
+        port: "80"
+        proto: tcp

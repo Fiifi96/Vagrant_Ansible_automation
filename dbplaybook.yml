@@ -27,6 +27,13 @@
         port: "3306"
         proto: tcp
 
+    - name: Allow port 80
+      ufw:
+        rule: limit
+        port: "80"
+        proto: tcp
+    
+
     - name: Enable remote login to mysql
       lineinfile:
         path: /etc/mysql/mysql.conf.d/mysqld.cnf
